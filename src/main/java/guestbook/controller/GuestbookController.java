@@ -23,6 +23,11 @@ public class GuestbookController {
         return service.getAllGuests();
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "TEST";
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public GuestEntry addGuestbookEntry(@RequestBody GuestEntry entry) {
