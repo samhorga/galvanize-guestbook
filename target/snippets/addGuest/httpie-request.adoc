@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ echo '{"id":null,"guestName":"guest1","comment":"some comment"}' | http POST 'http://localhost:8080/guests' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Accept:application/json'
+----

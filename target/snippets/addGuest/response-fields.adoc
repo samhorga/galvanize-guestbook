@@ -1,0 +1,16 @@
+|===
+|Path|Type|Description
+
+|`+guestName+`
+|`+String+`
+|name of guest
+
+|`+comment+`
+|`+String+`
+|comment left by guest
+
+|`+id+`
+|`+Number+`
+|entry id
+
+|===

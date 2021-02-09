@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+[]+`
+|`+Array+`
+|array of guestbook entries
+
+|`+[].guestName+`
+|`+String+`
+|name of guest
+
+|`+[].comment+`
+|`+String+`
+|comment left by guest
+
+|`+[].id+`
+|`+Number+`
+|entry id
+
+|===

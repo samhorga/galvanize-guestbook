@@ -1,0 +1,27 @@
+= Guestbook Api
+
+== Get All Guestbook Entries
+
+.request
+include::{snippets}/guestEntries/http-request.adoc[]
+
+.response
+include::{snippets}/guestEntries/http-response.adoc[]
+
+.response fields
+include::{snippets}/guestEntries/response-fields.adoc[]
+
+== Add Guestbook Entry
+
+.request
+include::{snippets}/addGuest/http-request.adoc[]
+
+.request fields
+include::{snippets}/addGuest/request-fields.adoc[]
+
+.response
+include::{snippets}/addGuest/http-response.adoc[]
+
+.response fields
+include::{snippets}/addGuest/response-fields.adoc[]
+

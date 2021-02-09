@@ -1,0 +1,4 @@
+[source,options="nowrap"]
+----
+[{"id":2,"guestName":"guest1","comment":"some comment"},{"id":3,"guestName":"guest2","comment":"some comment"}]
+----

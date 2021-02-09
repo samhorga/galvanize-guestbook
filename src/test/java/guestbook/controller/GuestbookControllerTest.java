@@ -5,6 +5,7 @@ import guestbook.model.GuestEntry;
 import guestbook.repository.GuestbookRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -14,15 +15,18 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
+@AutoConfigureRestDocs(outputDir = "target/snippets")
 class GuestbookControllerTest {
 
     @Autowired
@@ -44,7 +48,13 @@ class GuestbookControllerTest {
 
         mockMvc.perform(get("/guests"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(guestsString));
+                .andExpect(content().string(guestsString))
+                .andDo(document("guestEntries", responseFields(
+                        fieldWithPath("[]").description("array of guestbook entries"),
+                        fieldWithPath("[].guestName").description("name of guest"),
+                        fieldWithPath("[].comment").description("comment left by guest"),
+                        fieldWithPath("[].id").description("entry id")
+                )));
     }
 
     @Test
@@ -59,6 +69,14 @@ class GuestbookControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("guestName").value("guest1"))
-                .andExpect(jsonPath("comment").value("some comment"));
+                .andExpect(jsonPath("comment").value("some comment"))
+                .andDo(document("addGuest",
+                        requestFields(fieldWithPath("guestName").description("name of guest"),
+                                fieldWithPath("comment").description("comment left by guest"),
+                                fieldWithPath("id").description("entry id")),
+                        responseFields(fieldWithPath("guestName").description("name of guest"),
+                                fieldWithPath("comment").description("comment left by guest"),
+                                fieldWithPath("id").description("entry id")
+                )));
     }
 }
