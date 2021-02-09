@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  guests_db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+  guests_service:
+    image: galvanize-guestbook
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+    depends_on:
+      - guests_db
+
