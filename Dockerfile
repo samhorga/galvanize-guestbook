@@ -6,7 +6,7 @@ VOLUME /tmp
 COPY . .
 RUN apt-get update && apt-get install -y dos2unix
 RUN dos2unix gradlew
-RUN ./gradlew build
+RUN chmod +x gradlew
 
   # Phase 2 - Build container with runtime only to use .jar file within
 FROM openjdk:11.0-jre-slim
